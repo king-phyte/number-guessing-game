@@ -36,11 +36,8 @@ void update_highscore(int points)
         std::cout << "Unable to read file" << std::endl;
         return;
     }
-
-
 }
 
-// void print_guesses(int array[], int guess_count) {
 void print_guesses(std::vector<int> guesses) {
     if (guesses.size() > 1) {
         std::cout << "You got it right!" << std::endl;
@@ -163,13 +160,12 @@ void display_settings() {
 
 void play_game() {
     int attempts = 10;
-    // int guesses[attempts];
+    
     std::vector<int> guesses;
 
     std::cout << "Guess a number between 0 and " << upper_bound << std::endl;
 
     int random_number = generate_random_number(upper_bound);
-    std::cout << "Random Number = " << random_number << std::endl;
 
     do {
         if ((show_attempts==true) && (show_points==true)) {
@@ -182,7 +178,7 @@ void play_game() {
         {
             std::cout << "Points: " << points <<std::endl;
         }
-        // Game over
+        
         if (attempts < 1) {
             std::cout << "Game Over!" << std::endl;
             break;
@@ -193,27 +189,19 @@ void play_game() {
         std::cin >> user_guess;
 
         if (user_guess == random_number) {
-            // guesses[guess_count++] = user_guess; // Insert user guess at index before incrementing guess count
             guesses.push_back(user_guess);
             points += attempts;
-            /*
-                Alternatively...
-                guesses[guess_count] = user_guess;
-                guess_count++;
-            */
 
             print_guesses(guesses);
             break;
         }
         else if (user_guess < random_number) {
             std::cout << "Too low. Guess again." << std::endl;
-            // guesses[guess_count++] = user_guess; // Insert user guess at index before incrementing guess count
             guesses.push_back(user_guess);
             --attempts;
         }
         else if (user_guess > random_number) {
             std::cout << "Too high. Guess again." << std::endl;
-            // guesses[guess_count++] = user_guess; // Insert user guess at index before incrementing guess count
             guesses.push_back(user_guess);
             --attempts;
         }
@@ -226,7 +214,7 @@ void play_game() {
 
 
 int main() {
-    srand(time(NULL)); // Seed the random function
+    srand(time(NULL));
 
     int menu_option;
 
